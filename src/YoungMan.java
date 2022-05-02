@@ -1,11 +1,14 @@
 import java.util.Scanner;
 
-public class OldWoman extends Member {
+public class YoungMan extends Member {
 	
-	public OldWoman (MemberKind kind) {
+	public YoungMan (MemberKind kind) {
 		super(kind);
-	}
-
+	}	
+	
+	protected String Guardianemail;
+	protected String Guardianphonenumber;
+	
 	public void getUserInput(Scanner input) {
 		System.out.println("가입할 구성원의 내용을 기입해주세요.");
 		System.out.print("새로운 구성원 ID:");
@@ -36,7 +39,26 @@ public class OldWoman extends Member {
 			}
 			else {			
 			}
+		}
+		
+		answer = 'x';
+		while (answer != 'Y' && answer != 'y' && answer != 'N' && answer != 'n') {
+			System.out.print("보호자의 이메일을 가지고 있습니까? (Y/N)");
+			answer = input.next().charAt(0);
+			if (answer == 'Y' || answer == 'y') {		
+				System.out.print("보호자의 이메일:");
+				String email= input.next();
+				this.setEmail(email);
+				break;
+			}
+			else if (answer == 'N' || answer == 'n') {
+				this.setEmail("");
+				break;
+			}
+			else {			
+			}
 		}	
+
 
 		System.out.print("새로운 구성원 전화번호:");
 		String phonenumber= input.next();

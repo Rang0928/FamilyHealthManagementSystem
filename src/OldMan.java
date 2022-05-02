@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-public class OldWoman extends Member {
-	
-	public OldWoman (MemberKind kind) {
+public class OldMan extends Member {
+
+	public OldMan (MemberKind kind) {
 		super(kind);
 	}
 
