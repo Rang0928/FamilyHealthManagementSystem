@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MemberManager {
-	ArrayList<Member> members =  new ArrayList<Member>();
+	ArrayList<MemberInput> members =  new ArrayList<MemberInput>();
 	Scanner input;
 	MemberManager(Scanner input){
 		this.input = input;
@@ -12,8 +12,8 @@ public class MemberManager {
 		System.out.print("구성원의 ID:");
 		String memberid = input.next();
 		for (int i = 0; i<members.size(); i++) {
-			Member member = members.get(i);
-			if (member.getId() == memberid) {
+			MemberInput memberinput = members.get(i);
+			if (memberinput.getId() == memberid) {
 				int num = 0;				
 				while (num < 6) { // 메뉴가 6개 임으로 num의 수를 제한시킨다.
 					System.out.println("****가족 건강 관리 시스템****");
@@ -34,27 +34,27 @@ public class MemberManager {
 					if (num == 1) { // 1번은 구성원을 조회하고 간단한 인적사항을 알아볼 수 있다.
 						System.out.print("구성원 ID:");
 						String id = input.next();
-						member.setId(id);
+						memberinput.setId(id);
 					}
 					if (num == 1) { // 2번은 구성원을 조회하여 건강상태나 병력사항을 알아볼 수 있다.
 						System.out.print("구성원 PW:");
 						int password = input.nextInt();
-						member.setPassword(password);
+						memberinput.setPassword(password);
 					}	
 					if (num == 2) { // 3번은 구성원을 조회하여 2번에 맞추어 개선점 및 고려사항을 알아볼 수 있다.
 						System.out.print("구성원 이름:");	
 						String name = input.next();
-						member.setName(name);
+						memberinput.setName(name);
 					}
 					if (num == 3) { // 4번은 새로운 구성원을 추가할 수 있다.
 						System.out.print("구성원 Email:");
 						String email = input.next();
-						member.setEmail(email);
+						memberinput.setEmail(email);
 					}
 					if (num == 4) { // 5번은 기존 구성원을 삭제할 수 있다.
 						System.out.print("구성원 PN:");
 						String phonenumber = input.next();
-						member.setPhonenumber(phonenumber);
+						memberinput.setPhonenumber(phonenumber);
 					}
 					if (num == 5) { // 6번은 메뉴에서 나가는 기능이며 while문에서 break하여 나가진다.
 						continue;
@@ -66,8 +66,9 @@ public class MemberManager {
 	}
 
 	public void AddMember() {
+		
 		int kind = 0;
-		Member member;
+		MemberInput memberInput;
 		while (kind != 1 && kind != 2) {
 			System.out.println("1번-성인 남자");
 			System.out.println("2번-성인 여자");
@@ -76,27 +77,27 @@ public class MemberManager {
 			System.out.print("1번에서 4번 중 구성원의 성별에 맞는 번호를 고르시오:");
 			kind = input.nextInt();
 			if (kind == 1) {
-				member = new Member(MemberKind.OldMan);
-				member.getUserInput(input);
-				members.add(member);
+				memberInput = new OldMan(MemberKind.OldMan);
+				memberInput.getUserInput(input);
+				members.add(memberInput);
 				break;
 			}
 			else if (kind == 2) {
-				member = new OldWoman(MemberKind.OldWoman);
-				member.getUserInput(input);
-				members.add(member);
+				memberInput = new OldWoman(MemberKind.OldWoman);
+				memberInput.getUserInput(input);
+				members.add(memberInput);
 				break;
 			}
 			else if (kind == 3) {
-				member = new YoungMan(MemberKind.YoungMan);
-				member.getUserInput(input);
-				members.add(member);
+				memberInput = new YoungMan(MemberKind.YoungMan);
+				memberInput.getUserInput(input);
+				members.add(memberInput);
 				break;
 			}
 			else if (kind == 4) {
-				member = new YoungWoman(MemberKind.YoungWoman);
-				member.getUserInput(input);
-				members.add(member);
+				memberInput = new YoungWoman(MemberKind.YoungWoman);
+				memberInput.getUserInput(input);
+				members.add(memberInput);
 				break;
 			}
 			else {
@@ -111,7 +112,7 @@ public class MemberManager {
 		String id = input.next();
 		int index = -1;
 		for(int i = 0; i<members.size(); i++) {   		
-			if (members.get(i).getId() == id) {
+			if (memberInput.get(i).getId() == id) {
 				index = i;
 				break;
 			}

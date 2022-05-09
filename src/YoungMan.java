@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class YoungMan extends Member {
+public class YoungMan extends Member implements MemberInput {
 	
 	public YoungMan (MemberKind kind) {
 		super(kind);
@@ -63,5 +63,24 @@ public class YoungMan extends Member {
 		System.out.print("새로운 구성원 전화번호:");
 		String phonenumber= input.next();
 		this.setPhonenumber(phonenumber);
+	}
+	public void printInfo() {
+		String skind = "none";
+		switch(this.kind) {
+		case OldMan:
+			skind = "OM.";
+			break;
+		case OldWoman:
+			skind = "OW.";
+			break;
+		case YoungMan:
+			skind = "YM.";
+			break;
+		case YoungWoman:
+			skind = "YW.";
+			break;
+		default:			
+		}
+		System.out.println("분류:" + skind + "이름:" + name + " ID:" + id + " 비밀번호:" + password + " 이메일:" + email + " 전화번호:" + phonenumber + "보호자의 이메일:" + email + "보호자의 전화번호:" + phonenumber );
 	}
 }
