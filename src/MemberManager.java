@@ -1,8 +1,17 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MemberManager {
+public class MemberManager implements Serializable {
+	
+	
+	
+	
+	private static final long serialVersionUID = 3685095473703752321L;
+
+	
 	ArrayList<MemberInput> members =  new ArrayList<MemberInput>();
+	transient Scanner input;
 	Scanner input;
 	MemberManager(Scanner input){
 		this.input = input;
@@ -16,19 +25,29 @@ public class MemberManager {
 			if (memberinput.getId() == memberid) {
 				int num = 0;				
 				while (num < 6) { // 메뉴가 6개 임으로 num의 수를 제한시킨다.
-					System.out.println("****가족 건강 관리 시스템****");
-					System.out.println("     메뉴를 선택해주세요     ");
-
-					System.out.println("1.구성원 조회");
-					System.out.println("2.구성원 상태");
-					System.out.println("3.구성원 개선점");
-					System.out.println("4.구성원 추가");
-					System.out.println("5.구성원 삭제");
-					System.out.println("6.나가기");
-					System.out.println("************************");
+					showMenu();
+					num = input.nextInt();
 
 					System.out.println("1~6번 중 원하는 메뉴를 골라주세요.");
 					num = input.nextInt(); // 원하는 번호를 입력할 수 있게 만든다.
+					
+					switch(num) {
+					case1:
+						MemberManager.addMember();
+						break;
+					case2:
+						MemberManager.deleteMember();
+						break;
+					case3:
+						MemberManager.editMember();
+						break;
+					case4:
+						MemberManager.viewMember();
+						break;
+					default:
+					    continue;
+					}
+
 
 					//if나 switch문을 이용하여 표현가능하며 나는 switch문을 이용하여 만들었다.
 					if (num == 1) { // 1번은 구성원을 조회하고 간단한 인적사항을 알아볼 수 있다.
@@ -36,27 +55,27 @@ public class MemberManager {
 						String id = input.next();
 						memberinput.setId(id);
 					}
-					if (num == 1) { // 2번은 구성원을 조회하여 건강상태나 병력사항을 알아볼 수 있다.
+					else if (num == 2) { // 2번은 구성원을 조회하여 건강상태나 병력사항을 알아볼 수 있다.
 						System.out.print("구성원 PW:");
 						int password = input.nextInt();
 						memberinput.setPassword(password);
 					}	
-					if (num == 2) { // 3번은 구성원을 조회하여 2번에 맞추어 개선점 및 고려사항을 알아볼 수 있다.
+					else if (num == 3) { // 3번은 구성원을 조회하여 2번에 맞추어 개선점 및 고려사항을 알아볼 수 있다.
 						System.out.print("구성원 이름:");	
 						String name = input.next();
 						memberinput.setName(name);
 					}
-					if (num == 3) { // 4번은 새로운 구성원을 추가할 수 있다.
+					else if (num == 4) { // 4번은 새로운 구성원을 추가할 수 있다.
 						System.out.print("구성원 Email:");
 						String email = input.next();
 						memberinput.setEmail(email);
 					}
-					if (num == 4) { // 5번은 기존 구성원을 삭제할 수 있다.
+					else if (num == 5) { // 5번은 기존 구성원을 삭제할 수 있다.
 						System.out.print("구성원 PN:");
 						String phonenumber = input.next();
 						memberinput.setPhonenumber(phonenumber);
 					}
-					if (num == 5) { // 6번은 메뉴에서 나가는 기능이며 while문에서 break하여 나가진다.
+					else (num == 6) { // 6번은 메뉴에서 나가는 기능이며 while문에서 break하여 나가진다.
 						continue;
 					}		  
 				}
@@ -104,6 +123,19 @@ public class MemberManager {
 				System.out.print("1번에서 4번 중 구성원의 성별에 맞는 번호를 고르시오:");
 			}
 		}		
+	}
+	
+	public static void showMenu() {
+		System.out.println("****가족 건강 관리 시스템****");
+		System.out.println("     메뉴를 선택해주세요     ");
+
+		System.out.println("1.구성원 조회");
+		System.out.println("2.구성원 상태");
+		System.out.println("3.구성원 개선점");
+		System.out.println("4.구성원 추가");
+		System.out.println("5.구성원 삭제");
+		System.out.println("6.나가기");
+		System.out.println("************************");
 	}
 	
 

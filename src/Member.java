@@ -1,6 +1,12 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public abstract class Member {
+public abstract class Member implements MemberInput, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -65027500114073922126L;
+	
 	protected MemberKind kind = MemberKind.OldMan;
 	protected String id;
 	protected int password;
